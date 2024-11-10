@@ -124,7 +124,7 @@ class Purchase extends Base
      * @return boolean
      * @throws IPC_Exception
      */
-    public function process($submitForm = true)
+    public function process():string
     {
         $this->validate();
 
@@ -179,11 +179,12 @@ class Purchase extends Base
         $this->_addPostParam('PaymentParametersRequired', $this->getPaymentParametersRequired());
         $this->_addPostParam('PaymentMethod', $this->getPaymentMethod());
 
-        if ($submitForm) {
-            $this->_processHtmlPost();
-        }
+        // if ($submitForm) {
+        //     return $this->_getHtmlPost();
+        // }
 
-        return true;
+        // return true;
+        return $this->_getHtmlPost();
     }
 
     public function getFormParameters($escapeParameters = false)

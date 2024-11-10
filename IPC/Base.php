@@ -110,19 +110,20 @@ abstract class Base
     /**
      * Generate HTML form with POST params and auto-submit it
      */
-    protected function _processHtmlPost()
+    protected function _getHtmlPost()
     {
         #Add request signature
         $this->params['Signature'] = $this->_createSignature();
 
-        $c = '<body onload="document.ipcForm.submit();">';
+        $c = '<html><body onload="document.ipcForm.submit();">';
         $c .= '<form id="ipcForm" name="ipcForm" action="'.$this->getCnf()->getIpcURL().'" method="post">';
         foreach ($this->params as $k => $v) {
             $c .= "<input type=\"hidden\" name=\"".$k."\" value=\"".$v."\"  />\n";
         }
-        $c .= '</form></body>';
-        echo $c;
-        exit;
+        $c .= '</form></body></html>';
+        // echo $c;
+        return $c;
+        // exit;
     }
 
     /**
